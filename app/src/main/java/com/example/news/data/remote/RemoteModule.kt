@@ -9,21 +9,23 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object RemoteModule {
     private const val BASE_URL = "https://newsapi.org/"
 
-    fun provideApi(): NewsApi {
+    val client: OkHttpClient by lazy {
         val logger = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BASIC
         }
-        val client: OkHttpClient = OkHttpClient.Builder()
+
+        OkHttpClient.Builder()
             .addInterceptor(logger)
             .build()
+    }
 
-        val moshi: Moshi = Moshi.Builder().build()
+    private val moshi: Moshi by lazy { Moshi.Builder().build() }
 
-        return Retrofit.Builder()
+    fun provideApi(): NewsApi =
+        Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(NewsApi::class.java)
     }
-}

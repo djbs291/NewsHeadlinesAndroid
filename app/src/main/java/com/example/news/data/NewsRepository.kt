@@ -23,7 +23,10 @@ class NewsRepository (
                 title = dto.title ?: "(no title)",
                 imageUrl = dto.url2Image,
                 whenPublished = dto.whenPublished,
-                sourceString = dto.source?.name
+                sourceString = dto.source?.name,
+                description = dto.description,
+                content = dto.text,
+                url = dto.url
             )
         }.sortedByDescending { article ->
             epochMillis(article.whenPublished)

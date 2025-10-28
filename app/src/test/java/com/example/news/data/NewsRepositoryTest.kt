@@ -1,13 +1,12 @@
-package com.example.news.testutil
+package com.example.news.data
 
 import com.example.news.data.remote.ArticleObject
 import com.example.news.data.remote.NewsApi
 import com.example.news.data.remote.NewsResponse
 import com.example.news.data.remote.SourceObject
-import com.example.news.data.NewsRepository
 import com.example.news.domain.Article
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Test
 
 /**
@@ -64,14 +63,15 @@ class NewsRepositoryTest {
         val items: List<Article> = repo.getTopHeadlines()
 
         // Map field and sort newest first
-        assertEquals(2, items.size)
-        assertEquals("Newer", items[0].title)
-        assertEquals("Older", items[1].title)
+        Assert.assertEquals(2, items.size)
+        Assert.assertEquals("Newer", items[0].title)
+        Assert.assertEquals("Older", items[1].title)
 
         // spot-check mapping
-        assertEquals("BBC News", items[0].sourceString)
-        assertEquals("2025-01-02T10:00:00Z", items[0].whenPublished)
-        assertEquals("https://example.com/a.jpg", items[0].imageUrl)
+        Assert.assertEquals("BBC News", items[0].sourceString)
+        Assert.assertEquals("2025-01-02T10:00:00Z", items[0].whenPublished)
+        Assert.assertEquals("https://example.com/a.jpg", items[0].imageUrl)
+        Assert.assertEquals("https://example.com/a", items[0].url)
     }
     @Test
     fun `gracefully handles null title`() = runTest {
@@ -93,7 +93,7 @@ class NewsRepositoryTest {
 
         val items = repo.getTopHeadlines()
 
-        assertEquals(1, items.size)
-        assertEquals("(no title)", items.first().title)
+        Assert.assertEquals(1, items.size)
+        Assert.assertEquals("(no title)", items.first().title)
     }
 }

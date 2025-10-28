@@ -3,6 +3,7 @@ plugins {
   id("org.jetbrains.kotlin.android")
   id("org.jetbrains.kotlin.plugin.compose")
   id("org.jetbrains.kotlin.kapt")
+  id("kotlin-parcelize")
 //id("com.google.devtools.ksp")
 }
 
@@ -59,6 +60,7 @@ dependencies {
   implementation("androidx.compose.ui:ui-tooling-preview")
   debugImplementation("androidx.compose.ui:ui-tooling")
   implementation("androidx.compose.material3:material3:1.3.0")
+  implementation("androidx.compose.foundation:foundation:1.6.7")
   implementation("androidx.navigation:navigation-compose:2.8.3")
 
   // Material Components (provides Theme.Material3.* XML)
@@ -66,6 +68,8 @@ dependencies {
 
   // Images (Coil)
   implementation("io.coil-kt:coil-compose:2.7.0")
+  implementation("io.coil-kt:coil-gif:2.6.0")
+  implementation("io.coil-kt:coil-video:2.6.0")
 
   // Network / JSON
   implementation("com.squareup.retrofit2:retrofit:2.11.0")
